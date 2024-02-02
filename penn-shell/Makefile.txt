@@ -1,0 +1,13 @@
+CC=gcc
+CFLAGS=-Wall -g
+OBJ=my_penn-sh.o my_tokenizer.o my_redirection.o my_pipeline.o
+EXEC=my_penn-sh
+
+$(EXEC): $(OBJ)
+    $(CC) $(CFLAGS) -o $@ $^
+
+%.o: %.c
+    $(CC) $(CFLAGS) -c -o $@ $<
+
+clean:
+    rm -f $(OBJ) $(EXEC)
