@@ -31,6 +31,6 @@ void sigintHandler(int unused) {
 
 int main() {
     setupSignalHandlers();
-    shell_main_loop(); // Your shell's main loop
+    shell_main_loop(); 
     return 0;
 }

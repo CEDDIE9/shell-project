@@ -2,8 +2,8 @@
 #define MY_TOKENIZER_H
 
 typedef struct tokenizer {
-  char *str;  // Original string being tokenized
-  char *pos;  // Current position in string
+  char *str;  
+  char *pos;  
 } TOKENIZER;
 
 // Initializes a tokenizer for the given string.

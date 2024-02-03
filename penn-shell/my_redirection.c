@@ -19,7 +19,7 @@ int handleInputRedirection(char *inputFile) {
 
     if (dup2(fd, STDIN_FILENO) < 0) {
         perror("Error redirecting standard input");
-        close(fd);  // Ensure the file descriptor is closed even on error
+        close(fd); 
         return -1;
     }
 
@@ -42,7 +42,7 @@ int handleOutputRedirection(char *outputFile) {
 
     if (dup2(fd, STDOUT_FILENO) < 0) {
         perror("Error redirecting standard output");
-        close(fd);  // Ensure the file descriptor is closed even on error
+        close(fd);  
         return -1;
     }
 

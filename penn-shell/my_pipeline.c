@@ -14,7 +14,7 @@ void execute_command(char **cmd) {
 
 void execute_pipeline(char *commands[], int num_commands) {
     int i;
-    int in_fd = 0; // The input for the first command is STDIN.
+    int in_fd = 0; 
     int fd[2];
 
     for (i = 0; i < num_commands; i++) {
@@ -30,7 +30,7 @@ void execute_pipeline(char *commands[], int num_commands) {
         if (pid == -1) {
             perror("fork");
             exit(EXIT_FAILURE);
-        } else if (pid == 0) { // Child process
+        } else if (pid == 0) { 
             if (in_fd != STDIN_FILENO) {
                 if (dup2(in_fd, STDIN_FILENO) == -1) {
                     perror("dup2");
@@ -40,7 +40,7 @@ void execute_pipeline(char *commands[], int num_commands) {
             }
             // For all but the last command, set stdout to the pipe's write end.
             if (i < num_commands - 1) {
-                close(fd[0]); // Close read end of the pipe in the child.
+                close(fd[0]); 
                 if (dup2(fd[1], STDOUT_FILENO) == -1) {
                     perror("dup2");
                     exit(EXIT_FAILURE);
@@ -48,15 +48,15 @@ void execute_pipeline(char *commands[], int num_commands) {
                 close(fd[1]);
             }
             execute_command(commands[i]);
-        } else { // Parent process
-            wait(NULL); // Wait for the child to finish.
+        } else { 
+            wait(NULL); 
             if (in_fd != STDIN_FILENO) {
-                close(in_fd); // Close the previous read end.
+                close(in_fd); 
             }
             // For all but the last command, the next command's input is the read end of the pipe.
             if (i < num_commands - 1) {
-                close(fd[1]); // Close write end of the pipe in the parent.
-                in_fd = fd[0]; // Save the read end to be the input for the next command.
+                close(fd[1]);
+                in_fd = fd[0]; 
             }
         }
     }

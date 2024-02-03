@@ -36,15 +36,14 @@ void free_tokenizer(TOKENIZER *tokenizer) {
 char *get_next_token(TOKENIZER *tokenizer) {
   assert(tokenizer != NULL);
 
-  while (isspace(*tokenizer->pos)) tokenizer->pos++;  // Skip leading spaces
+  while (isspace(*tokenizer->pos)) tokenizer->pos++;  
 
-  if (*tokenizer->pos == '\0') return NULL;  // End of string
-
+  if (*tokenizer->pos == '\0') return NULL; 
   char *startptr = tokenizer->pos;
 
   // Single-character tokens
   if (strchr("|&<>", *startptr) != NULL) {
-    char *tok = (char *)malloc(2);  // Allocate space for char and null terminator
+    char *tok = (char *)malloc(2); 
     if (tok == NULL) {
       perror("Failed to allocate token");
       return NULL;
